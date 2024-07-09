@@ -1,0 +1,9 @@
+.filament-unlayer-editor>#editor-container {
+    position: relative;
+    min-height: 1000px;
+}
+
+.filament-unlayer-editor>#editor-container>iframe {
+    position: absolute;
+    min-width: auto !important;
+}
