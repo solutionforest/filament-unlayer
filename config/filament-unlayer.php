@@ -42,11 +42,12 @@ return [
         // custom fonts
     ],
     'safeHtml' => false, // Sanitizes HTML output to prevent executable JavaScript
-    'customJS' => [
+    'customJs' => [
         // custom JavaScript URL or source
     ],
-    'customCSS' => [
-        // custom CSS URL or source
+    'customCss' => [
+        '#u_body { min-height: 0 !important; }',
+        '.u_body { min-height: 0 !important; }'
     ],
     'textDirection' => 'ltr', // text direction
 ];

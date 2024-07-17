@@ -17,19 +17,21 @@
                 displayMode: '{{ config('filament-unlayer.displayMode') }}',
                 locale: '{{ config('filament-unlayer.locale') }}',
                 appearance: @js(config('filament-unlayer.appearance')),
-                user: @json(config('filament-unlayer.user')),
-                mergeTags: @json(config('filament-unlayer.mergeTags')),
-                designTags: @json(config('filament-unlayer.designTags')),
-                specialLinks: @json(config('filament-unlayer.specialLinks')),
-                tools: @json(config('filament-unlayer.tools')),
-                blocks: @json(config('filament-unlayer.blocks')),
-                editor: @json(config('filament-unlayer.editor')),
-                fonts: @json(config('filament-unlayer.fonts')),
-                safeHtml: @json(config('filament-unlayer.safeHtml')),
-                customJs: @json(config('filament-unlayer.customJs')),
-                customCss: @json(config('filament-unlayer.customCss')),
+                user: {{ json_encode(config('filament-unlayer.user')) }},
+                mergeTags: {{ json_encode(config('filament-unlayer.mergeTags')) }},
+                designTags: {{ json_encode(config('filament-unlayer.designTags')) }},
+                specialLinks: {{ json_encode(config('filament-unlayer.specialLinks')) }},
+                tools: {{ json_encode(config('filament-unlayer.tools')) }},
+                blocks: {{ json_encode(config('filament-unlayer.blocks')) }},
+                editor: {{ json_encode(config('filament-unlayer.editor')) }},
+                fonts: {{ json_encode(config('filament-unlayer.fonts')) }},
+                safeHtml: {{ json_encode(config('filament-unlayer.safeHtml')) }},
+                customJs: {{ json_encode(config('filament-unlayer.customJs')) }},
+                customCss: {{ json_encode(config('filament-unlayer.customCss')) }},
                 textDirection: '{{ config('filament-unlayer.textDirection') }}',
             })
+    
+            unlayer.setBodyValues()
     
             var load = (JSON.parse(JSON.stringify(this.state)))
             unlayer.loadDesign(load)
@@ -38,22 +40,20 @@
             unlayer.addEventListener('design:updated', function(updates) {
                 unlayer.exportHtml(function(data) {
                     var json = data.design; // design json
-                    var html = data.html;
-                    var text = data.text; // final text
-    
-                    // Save the json, or html here
                     $data.setState(json)
+                    $data.saveHtml()
                 })
             })
     
-            Livewire.hook('commit', ({ component, commit, succeed, fail, respond }) => {
-                succeed(({ snapshot, effect }) => {
-                    $nextTick(() => {
-                        $data.saveEditor()
-                    })
+    
+        },
+    
+        saveHtml: function() {
+            unlayer.exportHtml(function(data) {
+                $wire.dispatch('saveHtml', {
+                    html: data.html
                 })
             })
-    
         },
     
         setState: function(state) {
@@ -61,50 +61,16 @@
             @this.set('{{ $getStatePath() }}', this.state)
         },
     
-        saveEditor: function() {
-            unlayer.saveDesign(function(design) {
-                console.log(design)
-                this.state = design
-            })
-        },
-    
-        exportHtml: function() {
-            unlayer.exportHtml(function(data) {
-                var html = data.html;
-            })
-        },
-    
-        exportPlainText: function() {
-            unlayer.exportPlainText(function(data) {
-                var text = data.text;
-            })
-        },
-    
-        exportImage: function() {
-            unlayer.exportImage(function(data) {
-                var imageUrl = data.url;
-            })
-        },
-    
-        exportPdf: function() {
-            unlayer.exportPdf(function(data) {
-                var pdfUrl = data.url;
-            })
-        },
-    
-        exportZip: function() {
-            unlayer.exportZip(function(data) {
-                var fileUrl = data.url;
-            })
-        }
-    }" x-load-js="[@js(\Filament\Support\Facades\FilamentAsset::getScriptSrc('unlayer'))]"
-        x-load-css="[@js(\Filament\Support\Facades\FilamentAsset::getStyleHref('filament-unlayer-styles', package: 'solutionforest/filament-unlayer'))]" x-init="initEditor()">
+    }" wire:callSaveHtml="saveHtml"
+        x-load-js="[@js(\Filament\Support\Facades\FilamentAsset::getScriptSrc('unlayer'))]" x-load-css="[@js(\Filament\Support\Facades\FilamentAsset::getStyleHref('filament-unlayer-styles', package: 'solutionforest/filament-unlayer'))]" x-init="initEditor()">
 
         <div class="filament-unlayer-editor">
             <div id="editor-container">
 
             </div>
         </div>
+
+        <div x-text="htmlstate" id="htmlstate" class="hidden"></div>
 
     </div>
 
