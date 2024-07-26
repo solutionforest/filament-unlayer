@@ -32,45 +32,41 @@
             })
     
             unlayer.setBodyValues()
-    
-            var load = (JSON.parse(JSON.stringify(this.state)))
-            unlayer.loadDesign(load)
-    
+
+            if (typeof this.state === 'string') {
+                var load = JSON.parse(this.state);
+                if (load && load.design) {
+                    unlayer.loadDesign(load.design);
+                }
+            } 
+            
     
             unlayer.addEventListener('design:updated', function(updates) {
                 unlayer.exportHtml(function(data) {
-                    var json = data.design; // design json
-                    $data.setState(json)
-                    $data.saveHtml()
+                    var design = data.design; // design json
+                    var html = data.html; // HTML string
+                    $data.setState(design, html)
                 })
             })
     
-    
         },
     
-        saveHtml: function() {
-            unlayer.exportHtml(function(data) {
-                $wire.dispatch('saveHtml', {
-                    html: data.html
-                })
-            })
-        },
-    
-        setState: function(state) {
-            this.state = state
+        setState: function(design, html) {
+            this.state = {
+                design: design,
+                html: html
+            }
+                console.log(this.state);
             @this.set('{{ $getStatePath() }}', this.state)
         },
     
-    }" wire:callSaveHtml="saveHtml"
-        x-load-js="[@js(\Filament\Support\Facades\FilamentAsset::getScriptSrc('unlayer'))]" x-load-css="[@js(\Filament\Support\Facades\FilamentAsset::getStyleHref('filament-unlayer-styles', package: 'solutionforest/filament-unlayer'))]" x-init="initEditor()">
+    }" x-load-js="[@js(\Filament\Support\Facades\FilamentAsset::getScriptSrc('unlayer'))]" x-load-css="[@js(\Filament\Support\Facades\FilamentAsset::getStyleHref('filament-unlayer-styles', package: 'solutionforest/filament-unlayer'))]" x-init="initEditor()">
 
         <div class="filament-unlayer-editor">
             <div id="editor-container">
 
             </div>
         </div>
-
-        <div x-text="htmlstate" id="htmlstate" class="hidden"></div>
 
     </div>
 
