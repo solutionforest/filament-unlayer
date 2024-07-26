@@ -20,18 +20,6 @@ class FilamentUnlayer extends Field
             'design' => [],
             'html' => ''
         ]);
-
-        $this->afterStateHydrated(static function ($component, $state) {
-
-            if (is_array($state)) {
-                $component->state([
-                    'design' => [],
-                    'html' => ''
-                ]);
-            }
-
-            
-        });
-
+        
     }
 }

@@ -56,7 +56,6 @@
                 design: design,
                 html: html
             }
-                console.log(this.state);
             @this.set('{{ $getStatePath() }}', this.state)
         },
     
