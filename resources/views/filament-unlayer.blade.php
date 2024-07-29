@@ -31,15 +31,14 @@
                 textDirection: '{{ config('filament-unlayer.textDirection') }}',
             })
     
-            unlayer.setBodyValues()
-
             if (typeof this.state === 'string') {
                 var load = JSON.parse(this.state);
-                if (load && load.design) {
-                    unlayer.loadDesign(load.design);
-                }
-            } 
-            
+            } else {
+                var load = this.state;
+            }
+            if (load && load.design) {
+                unlayer.loadDesign(load.design);
+            }
     
             unlayer.addEventListener('design:updated', function(updates) {
                 unlayer.exportHtml(function(data) {
@@ -59,7 +58,8 @@
             @this.set('{{ $getStatePath() }}', this.state)
         },
     
-    }" x-load-js="[@js(\Filament\Support\Facades\FilamentAsset::getScriptSrc('unlayer'))]" x-load-css="[@js(\Filament\Support\Facades\FilamentAsset::getStyleHref('filament-unlayer-styles', package: 'solutionforest/filament-unlayer'))]" x-init="initEditor()">
+    }" x-load-js="[@js(\Filament\Support\Facades\FilamentAsset::getScriptSrc('unlayer'))]"
+        x-load-css="[@js(\Filament\Support\Facades\FilamentAsset::getStyleHref('filament-unlayer-styles', package: 'solutionforest/filament-unlayer'))]" x-init="initEditor()">
 
         <div class="filament-unlayer-editor">
             <div id="editor-container">

@@ -13,7 +13,7 @@ return [
     */
 
     'display-mode' => 'web',
-    'locale'=> 'en-US',
+    'locale' => 'en-US',
     'appearance' => [
         // appearance options to change the look and feel of the editor
     ],
@@ -46,8 +46,7 @@ return [
         // custom JavaScript URL or source
     ],
     'customCss' => [
-        '#u_body { min-height: 0 !important; }',
-        '.u_body { min-height: 0 !important; }'
+        // custom CSS URL or source
     ],
     'textDirection' => 'ltr', // text direction
 ];
