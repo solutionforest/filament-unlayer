@@ -12,8 +12,8 @@ return [
     |
     */
 
-    'display-mode' => 'web',
-    'locale' => 'en-US',
+    'display-mode' => 'web', // Default display mode
+    'locale' => 'en-US', // Default locale
     'appearance' => [
         // appearance options to change the look and feel of the editor
     ],

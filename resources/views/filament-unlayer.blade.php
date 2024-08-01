@@ -16,8 +16,8 @@
             unlayer.init({
                 id: 'editor-container',
                 projectId: 1,
-                displayMode: '{{ config('filament-unlayer.displayMode') }}',
-                locale: '{{ config('filament-unlayer.locale') }}',
+                displayMode: '{{ $getDisplayMode() ?? config('filament-unlayer.displayMode') }}',
+                locale: '{{ $getLocale() ?? config('filament-unlayer.locale') }}',
                 appearance: @js(config('filament-unlayer.appearance')),
                 user: {{ json_encode(config('filament-unlayer.user')) }},
                 mergeTags: {{ json_encode(config('filament-unlayer.mergeTags')) }},

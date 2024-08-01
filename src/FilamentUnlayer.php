@@ -14,6 +14,10 @@ class FilamentUnlayer extends Field
 
     protected ?string $htmlStatePath = null;
 
+    protected ?string $displayMode = null;
+
+    protected ?string $locale = null;
+
     public function mountHtmlStateTo(string $htmlStatePath): static
     {
         $this->htmlStatePath = $htmlStatePath;
@@ -24,5 +28,29 @@ class FilamentUnlayer extends Field
     public function getHtmlStatePath(): null|string
     {
         return $this->htmlStatePath;
+    }
+
+    public function displayMode(string $displayMode): static
+    {
+        $this->displayMode = $displayMode;
+
+        return $this;
+    }
+
+    public function getDisplayMode(): null|string
+    {
+        return $this->displayMode;
+    }
+
+    public function locale(string $locale): static
+    {
+        $this->locale = $locale;
+
+        return $this;
+    }
+
+    public function getLocale(): null|string
+    {
+        return $this->locale;
     }
 }
