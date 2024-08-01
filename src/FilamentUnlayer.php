@@ -12,14 +12,17 @@ class FilamentUnlayer extends Field
 
     protected string $view = 'filament-unlayer::filament-unlayer';
 
-    protected function setUp(): void
-    {
-        parent::setUp();
+    protected ?string $htmlStatePath = null;
 
-        $this->default([
-            'design' => [],
-            'html' => ''
-        ]);
-        
+    public function mountHtmlStateTo(string $htmlStatePath): static
+    {
+        $this->htmlStatePath = $htmlStatePath;
+
+        return $this;
+    }
+
+    public function getHtmlStatePath(): null|string
+    {
+        return $this->htmlStatePath;
     }
 }

@@ -6,8 +6,10 @@
     </div>
 
     <div wire:ignore class="filament-unlayer" x-data="{
+        html: {{ $getHtmlStatePath() ? '$wire.' . $applyStateBindingModifiers('entangle(\'' . $getHtmlStatePath() . '\')') : 'null' }},
         state: $wire.{{ $applyStateBindingModifiers('entangle(\'' . $getStatePath() . '\')') }},
         statePath: '{{ $getStatePath() }}',
+        htmlStatePath: '{{ $getHtmlStatePath() }}',
     
         initEditor: function() {
     
@@ -34,10 +36,11 @@
             if (typeof this.state === 'string') {
                 var load = JSON.parse(this.state);
             } else {
-                var load = this.state;
+                var load = JSON.parse(JSON.stringify(this.state))
             }
-            if (load && load.design) {
-                unlayer.loadDesign(load.design);
+    
+            if (load) {
+                unlayer.loadDesign(load);
             }
     
             unlayer.addEventListener('design:updated', function(updates) {
@@ -51,11 +54,10 @@
         },
     
         setState: function(design, html) {
-            this.state = {
-                design: design,
-                html: html
+            @this.set('{{ $getStatePath() }}', design)
+            if ($data.htmlStatePath.length > 0) {
+                @this.set('{{ $getHtmlStatePath() }}', html)
             }
-            @this.set('{{ $getStatePath() }}', this.state)
         },
     
     }" x-load-js="[@js(\Filament\Support\Facades\FilamentAsset::getScriptSrc('unlayer'))]"
