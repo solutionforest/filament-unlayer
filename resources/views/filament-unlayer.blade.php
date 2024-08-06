@@ -39,8 +39,8 @@
                 var load = JSON.parse(JSON.stringify(this.state))
             }
     
-            if (load) {
-                unlayer.loadDesign(load);
+            if (load && load.design) {
+                unlayer.loadDesign(load.design);
             }
     
             unlayer.addEventListener('design:updated', function(updates) {
@@ -54,7 +54,11 @@
         },
     
         setState: function(design, html) {
-            @this.set('{{ $getStatePath() }}', design)
+            this.state = {
+                design: design,
+                html: html
+            }
+            @this.set('{{ $getStatePath() }}', this.state)
             if ($data.htmlStatePath.length > 0) {
                 @this.set('{{ $getHtmlStatePath() }}', html)
             }

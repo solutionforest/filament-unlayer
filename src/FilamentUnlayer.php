@@ -18,6 +18,17 @@ class FilamentUnlayer extends Field
 
     protected ?string $locale = null;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->default([
+            'design' => [],
+            'html' => ''
+        ]);
+        
+    }
+    
     public function mountHtmlStateTo(string $htmlStatePath): static
     {
         $this->htmlStatePath = $htmlStatePath;
