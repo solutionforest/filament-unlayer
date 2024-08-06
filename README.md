@@ -46,10 +46,34 @@ return [
 
 ## Usage
 
+This field will save both html and design data as json.
+
 ```php
-$filamentUnlayer = new SolutionForest\FilamentUnlayer();
-echo $filamentUnlayer->echoPhrase('Hello, SolutionForest!');
+\SolutionForest\FilamentUnlayer\FilamentUnlayer::make('content');
 ```
+
+
+## Exporting html
+
+Mount the html state by using function mountHtmlStateTo.
+
+```php
+\SolutionForest\FilamentUnlayer\FilamentUnlayer::make('json-content')->mountHtmlStateTo('data.content');
+Hidden::make('content');
+```
+
+Alternatively, get the html from the field data.
+
+```php
+class EditRecord
+{
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['content'] = $data['json-content']['html'];
+        return $data;
+    }
+```
+
 
 ## Testing
 
