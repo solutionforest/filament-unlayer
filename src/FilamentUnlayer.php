@@ -5,6 +5,8 @@ namespace SolutionForest\FilamentUnlayer;
 use Closure;
 use Filament\Forms\Components\Concerns\HasState;
 use Filament\Forms\Components\Field;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class FilamentUnlayer extends Field
 {
@@ -26,9 +28,8 @@ class FilamentUnlayer extends Field
             'design' => [],
             'html' => ''
         ]);
-        
     }
-    
+
     public function mountHtmlStateTo(string $htmlStatePath): static
     {
         $this->htmlStatePath = $htmlStatePath;
@@ -63,5 +64,18 @@ class FilamentUnlayer extends Field
     public function getLocale(): null|string
     {
         return $this->locale;
+    }
+
+    public function uploadImage($image)
+    {
+
+        Log::alert('uploadImage', ['image' => $image]);
+        dd($image);
+
+        return response()->json([
+            'file' => [
+                'url' => Storage::disk(config('filament-unlayer.upload.disk'))->url($path),
+            ],
+        ]);
     }
 }

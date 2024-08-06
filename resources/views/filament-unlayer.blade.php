@@ -10,12 +10,12 @@
         state: $wire.{{ $applyStateBindingModifiers('entangle(\'' . $getStatePath() . '\')') }},
         statePath: '{{ $getStatePath() }}',
         htmlStatePath: '{{ $getHtmlStatePath() }}',
+        customUpload: '{{ config('filament-unlayer.customUpload') }}',
     
         initEditor: function() {
     
             unlayer.init({
                 id: 'editor-container',
-                projectId: 1,
                 displayMode: '{{ $getDisplayMode() ?? config('filament-unlayer.displayMode') }}',
                 locale: '{{ $getLocale() ?? config('filament-unlayer.locale') }}',
                 appearance: @js(config('filament-unlayer.appearance')),
@@ -41,6 +41,36 @@
     
             if (load && load.design) {
                 unlayer.loadDesign(load.design);
+            }
+    
+            if (this.customUpload) {
+                unlayer.registerCallback('image', function(file, done) {
+                    var data = new FormData()
+                    data.append('file', file.attachments[0])
+    
+                    fetch('{{ config('filament-unlayer.upload.url') }}', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: data
+                    }).then(response => {
+                        // Make sure the response was valid
+                        if (response.status >= 200 && response.status < 300) {
+                            return response
+                        } else {
+                            var error = new Error(response.statusText)
+                            error.response = response
+                            throw error
+                        }
+                    }).then(response => {
+                        return response.json()
+                    }).then(data => {
+                        // Pass the URL back to Unlayer to mark this upload as completed
+                        done({ progress: 100, url: data.file.url })
+                    })
+                })
             }
     
             unlayer.addEventListener('design:updated', function(updates) {

@@ -49,4 +49,27 @@ return [
         // custom CSS URL or source
     ],
     'textDirection' => 'ltr', // text direction
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |  File Upload Configuration
+    |--------------------------------------------------------------------------
+    |
+    |
+    |
+    */
+
+    'customUpload' => true, // When set to false, it will use default unlayer file storage support built-in with Amazon S3
+
+
+    'upload' => [
+        'url' => '/filament-unlayer-upload',
+        'class' => \SolutionForest\FilamentUnlayer\Services\UploadImage::class,
+        'disk' => 'public',
+        'path' => 'unlayer',
+        'visibility' => 'public',
+        'validation' => 'required|image',
+        'middlewares' => [],
+    ],
 ];

@@ -56,6 +56,8 @@ class FilamentUnlayerServiceProvider extends PackageServiceProvider
         if (file_exists($package->basePath('/../resources/views'))) {
             $package->hasViews(static::$viewNamespace);
         }
+        
+        $package->hasRoute('web');
     }
 
     public function packageRegistered(): void
