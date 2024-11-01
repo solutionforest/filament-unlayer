@@ -31,6 +31,17 @@ return [
     ],
     'tools' => [
         // options for tools and custom tools
+        'form' => [
+            'properties' => [
+                'action' => [
+                    'editor' => [
+                        'data' => [
+                            'allowCustomUrl' => true
+                        ]
+                    ]
+                ]
+            ]
+        ]
     ],
     'blocks' => [
         // custom blocks
