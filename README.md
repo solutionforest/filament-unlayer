@@ -14,7 +14,7 @@ This is where your description should go. Limit it to a paragraph or two. Consid
 You can install the package via composer:
 
 ```bash
-composer require solutionforest/filament-unlayer
+composer require solution-forest/filament-unlayer
 php artisan filament:assets
 ```
 
