@@ -25,7 +25,7 @@
         "spatie/laravel-package-tools": "^1.15.0"
     },
     "conflict": {
-        "filament/filament": "<4.0"
+        "filament/filament": "<4.0.0-beta"
     },
     "require-dev": {
         "laravel/pint": "^1.0",
