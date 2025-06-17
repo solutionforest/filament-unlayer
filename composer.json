@@ -24,6 +24,9 @@
         "filament/forms": "^3.0|^4.0",
         "spatie/laravel-package-tools": "^1.15.0"
     },
+    "conflict": {
+        "filament/filament": "<4.0"
+    },
     "require-dev": {
         "laravel/pint": "^1.0",
         "nunomaduro/collision": "^7.9",
