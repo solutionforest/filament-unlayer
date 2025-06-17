@@ -36,12 +36,12 @@ return [
                 'action' => [
                     'editor' => [
                         'data' => [
-                            'allowCustomUrl' => true
-                        ]
-                    ]
-                ]
-            ]
-        ]
+                            'allowCustomUrl' => true,
+                        ],
+                    ],
+                ],
+            ],
+        ],
     ],
     'blocks' => [
         // custom blocks
@@ -61,7 +61,6 @@ return [
     ],
     'textDirection' => 'ltr', // text direction
 
-
     /*
     |--------------------------------------------------------------------------
     |  File Upload Configuration
@@ -72,7 +71,6 @@ return [
     */
 
     'customUpload' => true, // When set to false, it will use default unlayer file storage support built-in with Amazon S3
-
 
     'upload' => [
         'url' => '/filament-unlayer-upload',

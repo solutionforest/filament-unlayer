@@ -10,11 +10,10 @@ use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
 use Livewire\Features\SupportTesting\Testable;
+use SolutionForest\FilamentUnlayer\Testing\TestsFilamentUnlayer;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use SolutionForest\FilamentUnlayer\Commands\FilamentUnlayerCommand;
-use SolutionForest\FilamentUnlayer\Testing\TestsFilamentUnlayer;
 
 class FilamentUnlayerServiceProvider extends PackageServiceProvider
 {
@@ -56,13 +55,11 @@ class FilamentUnlayerServiceProvider extends PackageServiceProvider
         if (file_exists($package->basePath('/../resources/views'))) {
             $package->hasViews(static::$viewNamespace);
         }
-        
+
         $package->hasRoute('web');
     }
 
-    public function packageRegistered(): void
-    {
-    }
+    public function packageRegistered(): void {}
 
     public function packageBooted(): void
     {
@@ -86,7 +83,7 @@ class FilamentUnlayerServiceProvider extends PackageServiceProvider
 
         // Handle Stubs
         if (app()->runningInConsole()) {
-            foreach (app(Filesystem::class)->files(__DIR__ . '/../stubs/') as $file) {
+            foreach (app(Filesystem::class)->files(__DIR__.'/../stubs/') as $file) {
                 $this->publishes([
                     $file->getRealPath() => base_path("stubs/filament-unlayer/{$file->getFilename()}"),
                 ], 'filament-unlayer-stubs');
@@ -94,7 +91,7 @@ class FilamentUnlayerServiceProvider extends PackageServiceProvider
         }
 
         // Testing
-        Testable::mixin(new TestsFilamentUnlayer());
+        Testable::mixin(new TestsFilamentUnlayer);
     }
 
     protected function getAssetPackageName(): ?string
@@ -109,7 +106,7 @@ class FilamentUnlayerServiceProvider extends PackageServiceProvider
     {
         return [
             // AlpineComponent::make('filament-unlayer', __DIR__ . '/../resources/dist/components/filament-unlayer.js'),
-            Css::make('filament-unlayer-styles', __DIR__ . '/../resources/dist/filament-unlayer.css'),
+            Css::make('filament-unlayer-styles', __DIR__.'/../resources/dist/filament-unlayer.css'),
             // Js::make('filament-unlayer-scripts', __DIR__ . '/../resources/dist/filament-unlayer.js'),
         ];
     }
@@ -119,9 +116,7 @@ class FilamentUnlayerServiceProvider extends PackageServiceProvider
      */
     protected function getCommands(): array
     {
-        return [
-            
-        ];
+        return [];
     }
 
     /**
@@ -153,7 +148,6 @@ class FilamentUnlayerServiceProvider extends PackageServiceProvider
      */
     protected function getMigrations(): array
     {
-        return [
-        ];
+        return [];
     }
 }
