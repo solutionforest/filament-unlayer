@@ -26,7 +26,7 @@ class FilamentUnlayer extends Field
 
         $this->default([
             'design' => [],
-            'html' => ''
+            'html' => '',
         ]);
     }
 
@@ -37,7 +37,7 @@ class FilamentUnlayer extends Field
         return $this;
     }
 
-    public function getHtmlStatePath(): null|string
+    public function getHtmlStatePath(): ?string
     {
         return $this->htmlStatePath;
     }
@@ -49,7 +49,7 @@ class FilamentUnlayer extends Field
         return $this;
     }
 
-    public function getDisplayMode(): null|string
+    public function getDisplayMode(): ?string
     {
         return $this->displayMode;
     }
@@ -61,7 +61,7 @@ class FilamentUnlayer extends Field
         return $this;
     }
 
-    public function getLocale(): null|string
+    public function getLocale(): ?string
     {
         return $this->locale;
     }
@@ -70,7 +70,6 @@ class FilamentUnlayer extends Field
     {
 
         Log::alert('uploadImage', ['image' => $image]);
-        dd($image);
 
         return response()->json([
             'file' => [
