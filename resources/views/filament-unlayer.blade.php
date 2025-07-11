@@ -10,7 +10,7 @@
         state: $wire.{{ $applyStateBindingModifiers('entangle(\'' . $getStatePath() . '\')') }},
         statePath: '{{ $getStatePath() }}',
         htmlStatePath: '{{ $getHtmlStatePath() }}',
-        customUpload: '{{ config('filament-unlayer.customUpload') }}',
+        customUpload: {{ config('filament-unlayer.customUpload')?'true' : 'false' }},
     
         initEditor: function() {
     
@@ -33,13 +33,13 @@
                 textDirection: '{{ config('filament-unlayer.textDirection') }}',
             })
     
-            if (typeof this.state === 'string') {
+            if (typeof this.state === 'string' && this.state.length > 0) {
                 var load = JSON.parse(this.state);
             } else {
                 var load = JSON.parse(JSON.stringify(this.state))
             }
-    
-            if (load && load.design) {
+                
+            if (load && load.design && Object.values(load.design).length > 0) {
                 unlayer.loadDesign(load.design);
             }
     
