@@ -4,12 +4,13 @@ namespace SolutionForest\FilamentUnlayer;
 
 use Filament\Schemas\Components\Concerns\HasState;
 use Filament\Forms\Components\Field;
+use Filament\Support\Concerns\HasExtraAlpineAttributes;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class FilamentUnlayer extends Field
 {
-    use HasState;
+    use HasState, HasExtraAlpineAttributes;
 
     protected string $view = 'filament-unlayer::filament-unlayer';
 

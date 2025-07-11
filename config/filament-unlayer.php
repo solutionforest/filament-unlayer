@@ -1,5 +1,7 @@
 <?php
 
+use SolutionForest\FilamentUnlayer\Services\UploadImage;
+
 // config for SolutionForest/FilamentUnlayer
 return [
 
@@ -74,7 +76,7 @@ return [
 
     'upload' => [
         'url' => '/filament-unlayer-upload',
-        'class' => \SolutionForest\FilamentUnlayer\Services\UploadImage::class,
+        'class' => UploadImage::class,
         'disk' => 'public',
         'path' => 'unlayer',
         'visibility' => 'public',
