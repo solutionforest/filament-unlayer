@@ -6,8 +6,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/solution-forest/filament-unlayer.svg?style=flat-square)](https://packagist.org/packages/solution-forest/filament-unlayer)
 
 
-
-> **Filament Unlayer** brings the power of the [Unlayer](https://unlayer.com/) drag-and-drop email builder directly to your FilamentPHP admin panel. Effortlessly design beautiful, responsive email templates and layouts with a modern, no-code visual editor.
+> **Filament Unlayer** is a custom field package designed for [Filaletter](https://filaletter.solutionforest.net), the Filament Newsletter plugin. It enables rich, drag-and-drop email template editing within your FilamentPHP admin panel, powered by the Unlayer editor.
 
 With Filament Unlayer, you can:
 
