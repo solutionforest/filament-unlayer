@@ -25,6 +25,13 @@ This is where your description should go. Limit it to a paragraph or two. Consid
 
 ## Installation
 
+
+| Filament Version | Filament Newsletter Version |
+|------------------|---------------------------|
+| v3.x             | v0.x               |
+| v4.x             | v2.x
+| v5.x             | >= v2.0.7
+
 You can install the package via composer:
 
 ```bash
